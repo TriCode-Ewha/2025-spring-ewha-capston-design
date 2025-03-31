@@ -360,7 +360,7 @@ if processed_path:
     loader = PyMuPDFLoader(processed_path)
     docs = loader.load()
 ```
-`PyMuPDFLoader`와 **`loader.load()`**를 사용하여 PDF 파일을 로드하고 내용을 텍스트로 추출한다.
+`PyMuPDFLoader`와 `loader.load()`를 사용하여 PDF 파일을 로드하고 내용을 텍스트로 추출한다.
 
 <br>
 
