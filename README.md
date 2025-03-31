@@ -19,7 +19,14 @@ This is Team35:Tricode's 2025-spring-ewha-capston-design repository.
 <br>
 
 ## (2) 기존연구와의 비교 
-
+**1. chatGPT와 Edu've비교**
+<br>
+<img width="365" alt="Image" src="https://github.com/user-attachments/assets/a6971ad3-c924-4a11-96dd-9d6c87a2ff6c" />
+<br>
+**2. Notion과 Edu've비교**
+<br>
+<img width="368" alt="Image" src="https://github.com/user-attachments/assets/4fae52f6-697a-4ef0-9768-c2c3d003375b" />
+<br>
    Edu've는 학습자료 기반의 정확한 답변 제공, 강력한 문서 검색 기능, 맞춤형 학습 지원, 실시간 학습 피드백, 효율적인 학습자료 관리를 통해 ChatGPT와 Notion보다 수강자와 강사에게 최적화된 솔루션을 제공한다.<br>
    RAG 구조를 활용하여 학습자료와 연계된 신뢰도 높은 답변을 제공하고, 벡터 검색으로 문서 내 특정 내용을 정확하게 탐색할 수 있다. 또한, AI 챗봇을 통해 24시간 실시간 피드백을 제공하고, 개인 맞춤형 학습 경험을 지원하여 학습 공백을 최소화한다.
 
