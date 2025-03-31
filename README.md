@@ -144,6 +144,11 @@ Edu've는 학습자료와 사용자의 상호작용 데이터를 지속적으로
 - 입력: 폴더 생성 요청(폴더명, 설명, 포함할 자료 리스트)
 - 출력: 생성된 폴더 ID 및 학습 자료 목록 출력
 
+<br>
+
+### USERCASE DIAGRAM
+![Image](https://github.com/user-attachments/assets/c9ce212e-35b1-4401-b984-34d315f2eb21)
+
 
 
 ## (2) 전체 시스템 구성 
