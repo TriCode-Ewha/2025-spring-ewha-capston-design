@@ -5,39 +5,61 @@ Eduve는 음성 인식(STT), OCR 문자 추출, 채팅 메시지 저장 등 기�
 <br>
 <br>
 
+## 📦 프로젝트 구성 레포
 
-## 📁 프로젝트 구조 요약
+본 프로젝트는 다음 세 개의 레포지토리로 구성되어 있습니다:
+
+| 이름         | 설명                           | GitHub 주소 |
+|--------------|--------------------------------|--------------|
+| **springboot** | 백엔드 주요 로직 (API, DB, STT, JWT 등)  | [Eduve Spring Boot](https://github.com/TriCode-Ewha/eduve-backend-springboot) |
+| **flask**     | AI 모델 기반 RAG  서버 (LangChain, 임베딩, 유사도 검색)     | [Eduve Flask AI](https://github.com/TriCode-Ewha/eduve-backend-flask) |
+| **front**     | 프론트엔드 클라이언트 (웹 인터페이스, React) | [Eduve Front](https://github.com/TriCode-Ewha/eduve-frontend) |
+
+
+<br>
+<br>
+
+## 🧩 시스템 구성 요소 설명
+
+### 1. Spring Boot (eduve-springboot)
+
+RESTful API, 사용자 인증, DB 관리, STT, OCR 등 핵심 백엔드 기능을 담당합니다.
+
+<br>
+
+#### 📁 주요 디렉토리 구조
 
 ```
 eduve/
 ├── src/
 │ └── main/
 │ ├── java/tricode/eduve/
-│ │ ├── config/ # 설정 클래스 (Security 등)
-│ │ ├── controller/ # REST API 엔드포인트
-│ │ ├── service/ # 비즈니스 로직
-│ │ ├── dto/ # 요청/응답 DTO
-│ │ ├── domain/ # Entity 클래스
-│ │ ├── repository/ # JPA 레포지토리
-│ │ ├── jwt/ # 인증 필터, JWT 유틸
-│ │ └── EduveApplication.java # Spring Boot 메인 클래스
+│ │ ├── config/                   # 설정 클래스 (Security 등)
+│ │ ├── controller/               # REST API 엔드포인트
+│ │ ├── service/                  # 비즈니스 로직
+│ │ ├── dto/                      # 요청/응답 DTO
+│ │ ├── domain/                   # Entity 클래스
+│ │ ├── repository/               # JPA 레포지토리
+│ │ ├── jwt/                      # 인증 필터, JWT 유틸
+│ │ └── EduveApplication.java     # Spring Boot 메인 클래스
+│ │
 │ └── resources/
-│ ├── application.yml # 환경설정
-│ └── sample/ # 샘플 데이터
+│ ├── application.yml             # 환경설정
+│ 
 ├── scripts/
 │ ├── start.sh
 │ └── stop.sh
-├── appspec.yml # AWS 배포 스크립트
+│
+├── appspec.yml                   # AWS 배포 스크립트
 ├── build.gradle
 ├── settings.gradle
 └── README.md
 ```
 
 <br>
-<br>
 
 
-## 🧾 Source Code 설명
+### 🧾 Source Code 설명
 
 | 디렉토리 | 설명 |
 |----------|------|
@@ -50,7 +72,7 @@ eduve/
 
 <br>
 
-## 🛠 How to Build
+### 🛠 How to Build
 
 Gradle을 사용하여 프로젝트를 빌드합니다.
 
@@ -59,11 +81,10 @@ Gradle을 사용하여 프로젝트를 빌드합니다.
 ```
 
 <br>
-<br>
 
 
 
-## 📦 How to Install & Run
+### 📦 How to Install & Run
 
 빌드 후 다음 명령으로 실행할 수 있습니다:
 
@@ -78,6 +99,112 @@ sh scripts/start.sh
 
 <br>
 <br>
+<br>
+
+---
+
+### 2. Flask (eduve-flask)
+RAG (Retrieval-Augmented Generation) 기반 AI 서버입니다. 사용자 질의에 대해 임베딩-검색-생성 파이프라인을 구성합니다.
+
+<br>
+
+#### 📁 주요 디렉토리 구조
+
+```
+eduve-flask/
+├── app.py              # Flask 실행 진입점
+├── rag/
+│   ├── embedder.py     # 문장 임베딩 처리
+│   ├── retriever.py    # 벡터 DB 검색기
+│   └── generator.py    # LLM 기반 응답 생성기
+├── requirements.txt    # 패키지 의존성 정의
+└── README.md
+```
+
+<br>
+
+
+#### 🧾 Source Code 설명
+
+| 디렉토리 / 파일     | 설명 |
+|---------------------|------|
+| `app.py`            | Flask 서버 실행 및 API 라우팅 구성 |
+| `rag/embedder.py`   | 입력 문장을 벡터로 변환 (OpenAI embedding API) |
+| `rag/retriever.py`  | Chroma 기반 벡터 검색 |
+| `rag/generator.py`  | LLM 호출로 응답 생성 (GPT-4) |
+| `requirements.txt`  | 프로젝트 실행에 필요한 Python 패키지 목록 |
+
+<br>
+
+#### 🛠 How to Build
+
+아래 명령을 통해 가상환경을 생성하고 필요한 의존성 패키지를 설치합니다.
+
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+<br>
+
+
+
+#### 📦 How to Install & Run
+
+설치 후 Flask 서버를 아래 명령으로 실행합니다:
+
+```bash
+python app.py
+```
+- 기본 포트는 http://localhost:5000입니다.
+- API 요청 예시는 /chat, /retrieve, /generate 등의 라우트에 정의됩니다.
+
+<br>
+<br>
+<br>
+
+---
+
+### 3. Frontend (eduve-front)
+사용자와 상호작용하는 웹 클라이언트입니다. React 기반이며, SpringBoot API 서버와 통신합니다.
+
+<br>
+
+#### 📁 주요 디렉토리 구조
+```
+eduve-front/
+├── public/
+├── src/
+│   ├── components/
+│   ├── views/
+│   ├── router/
+│   └── App.vue
+├── package.json
+└── README.md
+```
+
+#### 🛠 How to Build & Run
+
+```bash
+npm install
+npm run dev       # 개발 모드
+npm run build     # 배포용 번들
+```
+
+
+<br>
+
+---
+
+<br>
+<br>
+
+
+
+
 
 
 ## ✅ How to Test
